@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct ListNode{
+typedef struct ListNode {
     int val;
     struct ListNode* next;
-}Node, *PNode;
+} Node, *PNode;
 
 void createTwoLists(PNode l1, PNode l2);
 PNode newNode(PNode now, int val);
 void display(PNode list);
 PNode mergeTwoLists(PNode l1, PNode l2);
 
-int main(){
+int main() {
     PNode l1, l2;
     createTwoLists(l1, l2);
     display(l1);
@@ -20,7 +20,7 @@ int main(){
     return 0;
 }
 
-void createTwoLists(PNode l1, PNode l2){
+void createTwoLists(PNode l1, PNode l2) {
     PNode list1 = l1;
     PNode list2 = l2;
 
@@ -34,7 +34,7 @@ void createTwoLists(PNode l1, PNode l2){
     return;
 }
 
-PNode newNode(PNode now, int val){
+PNode newNode(PNode now, int val) {
     PNode node = (PNode)malloc(sizeof(Node));
     node->val = val;
     node->next = NULL;
@@ -42,13 +42,12 @@ PNode newNode(PNode now, int val){
     return node;
 }
 
-void display(PNode list){
+void display(PNode list) {
     PNode node = list;
-    for(int i=0; i<3; i++){
+    for (int i = 0; i < 3; i++) {
         printf("[%d] ", node->val);
         node = node->next;
     }
     return;
 }
-
 

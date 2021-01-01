@@ -6,10 +6,10 @@
  * };
  */
 void deleteNode(struct ListNode* node) {
-    if(node->next->next){
+    if (node->next->next) {
         node->val = node->next->val;
         deleteNode(node->next);
-    }else{
+    } else {
         node->val = node->next->val;
         node->next = NULL;
     }

@@ -3,12 +3,12 @@
 
 typedef int ElementType;
 
-typedef struct BSTreeNode{
+typedef struct BSTreeNode {
     ElementType data;           //关键字（数据域）
     struct BSTreeNode* lchild;  //左孩子
     struct BSTreeNode* rchild;  //右孩子
     struct BSTreeNode* parent;  //父结点
-}Node, *BSTree;
+} Node, *BSTree;
 
 /* 创建一颗二叉树 */
 BSTree create_bstree(int* array, int num);
@@ -28,63 +28,63 @@ void inorder_bstree(BSTree tree);
 /* 后序遍历二叉树 */
 void postorder_bstree(BSTree tree);
 
-int main(){
+int main() {
+    BSTree tree_node = NULL;
+    tree_node->data = 33;
     int num;
     BSTree root = NULL;
     printf("Please input the num of array, and the BSTree will build on it\n");
     scanf("%d", &num);
     int* array = (int*)calloc(num, sizeof(int));
     printf("Please input %d different elements: \n", num);
-    for(int i=0; i<num; i++){
-        scanf("%d", array+i);
+    for (int i = 0; i < num; i++) {
+        scanf("%d", array + i);
     }
 
     printf("the elements you just input are below:\n");
-    for(int i=0; i<num; i++){
-        printf("%d ", *(array+i));
+    for (int i = 0; i < num; i++) {
+        printf("%d ", *(array + i));
     }
 
     create_bstree(array, num);
 }
 
-BSTree create_bstree(int* array, int length){
+BSTree create_bstree(int* array, int length) {
     Node* root = NULL;
-    for(int i=0; i<length; i++)
-        insert(root, *(array+i));
+    for (int i = 0; i < length; i++) insert(root, *(array + i));
     return root;
 }
 
-bool insert(Node* root, int val){
+bool insert(Node* root, int val) {
     Node* node;
-    if(!search_bstree(root, val, NULL, node)){
+    if (!search_bstree(root, val, NULL, node)) {
         Node* new_node = (Node*)malloc(sizeof(Node));
         new_node->data = val;
         new_node->lchild = new_node->rchild = NULL;
 
-        if(!node)
+        if (!node)
             root = node;
-        else if(val<node->data)
+        else if (val < node->data)
             node->lchild = new_node;
         else
             node->rchild = new_node;
         return true;
-    }
-    else
+    } else
         return false;
     return false;
 }
 
-bool search_bstree(BSTree root, int val, Node* parent, Node* node){
-    if(!root){
+bool search_bstree(BSTree root, int val, Node* parent, Node* node) {
+    if (!root) {
         node = parent;
         return false;
-    }else{
-        if(val == root->data){
+    } else {
+        if (val == root->data) {
             node = root;
             return true;
-        }else if(val<root->data){
+        } else if (val < root->data) {
             return search_bstree(root->lchild, val, root, node);
-        }else{
+        } else {
             return search_bstree(root->rchild, val, root, node);
         }
     }
