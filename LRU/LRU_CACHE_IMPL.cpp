@@ -6,6 +6,10 @@
 
 using namespace std;
 
+/* 基于自定义双链表和
+ * STL-unordered_map
+ * 实现的LRU缓存淘汰算法 */
+
 /* 双向链表的节点结构 */
 struct LRUCacheNode {
     int key;
