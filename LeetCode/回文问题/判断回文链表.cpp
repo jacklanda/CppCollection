@@ -9,7 +9,26 @@
  * };
  */
 
-/* 法一：递归逆序比较法 */
+/* 法一：栈逆序比较法 */
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        stack<int> stk;
+        ListNode* ptr = head;
+        while (ptr) {
+            stk.push(ptr->val);
+            ptr = ptr->next;
+        }
+        while (head && !stk.empty()) {
+            if (head->val != stk.top()) return false;
+            stk.pop();
+            head = head->next;
+        }
+        return true;
+    }
+};
+
+/* 法二：递归逆序比较法 */
 class Solution {
 public:
     ListNode* first;
@@ -28,7 +47,7 @@ public:
     }
 };
 
-/* 法二：优化空间复杂度法（利用回文链表的对称性+反转链表）*/
+/* 法三：优化空间复杂度法（利用回文链表的对称性+反转链表）*/
 /**
  * Definition for singly-linked list.
  * struct ListNode {
