@@ -7,6 +7,10 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+/* 自顶向下递归：
+ * 时间复杂度：O(n^2)
+ * 空间复杂度：O(n) */
 class Solution {
 public:
     bool isBalanced(TreeNode* root) {
@@ -28,3 +32,24 @@ public:
         return 1;
     }
 };
+
+/* 自底向上递归：
+ * 时间复杂度：O(n)
+ * 空间复杂度：O(n) */
+class Solution {
+public:
+    int height(TreeNode* root) {
+        if (!root) return 0;
+        int left_height = height(root->left);
+        int right_height = height(root->right);
+        if (left_height == -1 || right_height == -1 ||
+            abs(left_height - right_height) > 1) {
+            return -1;
+        } else {
+            return max(left_height, right_height) + 1;
+        }
+    }
+
+    bool isBalanced(TreeNode* root) { return height(root) >= 0; }
+};
+
