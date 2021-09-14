@@ -1,5 +1,5 @@
 /* 双指针法 */
-/* 最坏时间复杂度: O(n) */
+/* 时间复杂度: O(n) */
 /* 空间复杂度: O(1) */
 class Solution {
 public:
@@ -16,5 +16,28 @@ public:
             rhs--;
         }
         return *rhs;
+    }
+};
+
+/* 二分查找法 */
+/* 时间复杂度: O(log(n)) */
+/* 空间复杂度: O(1) */
+class Solution {
+public:
+    int minArray(vector<int>& numbers) {
+        int low = 0;
+        int high = numbers.size() - 1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (numbers[mid] < numbers[high]) {
+                high = mid;
+            } else if (numbers[mid] > numbers[high]) {
+                low = mid + 1;
+            } else if (numbers[mid] == numbers[high]) {
+                --high;
+            }
+        }
+        return numbers[low];
     }
 };
