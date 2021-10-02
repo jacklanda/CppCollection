@@ -16,8 +16,7 @@ public:
     }
 
     void pop() {
-        if (stk.empty()) return;
-        stk.pop();
+        if (!stk.empty()) stk.pop();
     }
 
     int peek() { return stk.empty() ? -1 : stk.top(); }
