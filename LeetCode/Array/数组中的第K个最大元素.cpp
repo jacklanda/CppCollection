@@ -13,6 +13,21 @@ public:
     }
 };
 
+/* 多重集合 */
+/* 时间复杂度: O(n) */
+/* 空间复杂度: O(n) */
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        std::multiset<int, std::greater<int>> s(nums.begin(), nums.end());
+        for (auto& n : s) {
+            if (k == 1) return n;
+            --k;
+        }
+        return INT_MAX;
+    }
+};
+
 /* 减治法：
  * 利用每一次快排可以确定一个元素
  * 在数组中的绝对位置的特性，且在每次
