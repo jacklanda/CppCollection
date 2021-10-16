@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-class A {};
+struct A {};
 
 template <typename T>
 void print_type(T val) {
@@ -22,8 +22,8 @@ int main(int argc, char* argv[]) {
     int a{1};
     float b{2.71828};
     double c{3.1415926};
-
     A obj{};
+
     print_type(a);
     print_type(b);
     print_type(c);
