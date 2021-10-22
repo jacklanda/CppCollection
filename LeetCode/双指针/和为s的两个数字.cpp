@@ -41,7 +41,7 @@ public:
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int low = 0, high = nums.size() - 1;
+        int low = 0, high = (int)nums.size() - 1;
         while (low < high) {
             if (nums[low] == target - nums[high])
                 return {nums[low], nums[high]};
