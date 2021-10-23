@@ -14,16 +14,16 @@ class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
         std::vector<std::vector<int>> res;
-        dfs(root, res, 0);
+        bfs(root, res, 0);
         return res;
     }
-    void dfs(TreeNode* root, std::vector<std::vector<int>>& vec, int level) {
+    void bfs(TreeNode* root, std::vector<std::vector<int>>& vec, int level) {
         if (root == nullptr) return;
         if (vec.size() <= level)
             vec.resize(level + 1);  // level 表示遍历到第几层
         vec[level].emplace_back(root->val);
-        dfs(root->left, vec, level + 1);
-        dfs(root->right, vec, level + 1);
+        bfs(root->left, vec, level + 1);
+        bfs(root->right, vec, level + 1);
     }
 };
 
