@@ -8,22 +8,23 @@
  * };
  */
 
+/* 深度优先搜索 */
 /* 时间复杂度: O(n) */
 /* 空间复杂度: O(n) */
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
         std::vector<std::vector<int>> res;
-        bfs(root, res, 0);
+        dfs(root, res, 0);
         return res;
     }
-    void bfs(TreeNode* root, std::vector<std::vector<int>>& vec, int level) {
+    void dfs(TreeNode* root, std::vector<std::vector<int>>& vec, int level) {
         if (root == nullptr) return;
         if (vec.size() <= level)
             vec.resize(level + 1);  // level 表示遍历到第几层
         vec[level].emplace_back(root->val);
-        bfs(root->left, vec, level + 1);
-        bfs(root->right, vec, level + 1);
+        dfs(root->left, vec, level + 1);
+        dfs(root->right, vec, level + 1);
     }
 };
 
