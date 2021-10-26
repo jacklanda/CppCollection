@@ -53,40 +53,24 @@ public:
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        int len = nums.size();
-        int left = 0;
-        int right = len - 1;
-
-        // 第K大元素的索引是len - k
-        int target = len - k;
-
+        int len = nums.size(), left = 0, right = len - 1;
         while (true) {
-            int index = partition(nums, left, right);
-            if (index == target)
-                return nums[index];
-            else if (index < target)
-                left = index + 1;
-            else if (index > target)
-                right = index - 1;
-        }
-    }
-
-    int partition(vector<int>& nums, int left, int right) {
-        int pivot = nums[left];
-        int j = left;
-        for (int i = left + 1; i <= right; i++) {
-            if (nums[i] < pivot) {
-                j++;
-                swap(nums, j, i);
+            int l = left, r = right;
+            int idx = left;
+            std::swap(nums[left], nums[idx]);
+            while (l < r) {
+                while (l < r && nums[r] >= nums[left]) --r;
+                while (l < r && nums[l] <= nums[left]) ++l;
+                std::swap(nums[l], nums[r]);
             }
-        }
-        swap(nums, j, left);
-        return j;
-    }
+            std::swap(nums[l], nums[left]);
 
-    void swap(vector<int>& nums, int index1, int index2) {
-        int temp = nums[index1];
-        nums[index1] = nums[index2];
-        nums[index2] = temp;
+            if (l == len - k)
+                return nums[l];
+            else if (l > len - k)
+                right = l - 1;
+            else
+                left = l + 1;
+        }
     }
 };
