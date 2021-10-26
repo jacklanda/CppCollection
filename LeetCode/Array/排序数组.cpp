@@ -30,3 +30,26 @@ public:
         return low;
     }
 };
+
+/* 非比较排序 - 计数排序 */
+/* 在小范围内长度的数组使用计数排序效率较高 */
+/* 时间复杂度: O(n+k) => 其中 n 是数组的元素个数，k 是数组中最大的值 */
+/* 空间复杂度: O(n+k) */
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        vector<int> res;
+        res.reserve(nums.size());
+        int hash_array[100001] = {0};
+        for (const int& n : nums) {
+            hash_array[n + 50000]++;
+        }
+        for (int i = 0; i < 100001; ++i) {
+            while (hash_array[i] > 0) {
+                --hash_array[i];
+                res.push_back(i - 50000);
+            }
+        }
+        return res;
+    }
+};
