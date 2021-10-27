@@ -6,35 +6,36 @@
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
- * right(right) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+/* 时间复杂度: O(n) */
+/* 空间复杂度: O(n) */
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        vector<vector<int>> vec;
-        if (!root) return vec;
-        queue<TreeNode*> node_queue;
-        node_queue.push(root);
-        bool reverse = true;
-        while (!node_queue.empty()) {
-            deque<int> level_list;
-            int size = node_queue.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode* node = node_queue.front();
-                node_queue.pop();
-                if (reverse)
-                    level_list.push_back(node->val);
-                else
-                    level_list.push_front(node->val);
-                if (node->left) node_queue.push(node->left);
-                if (node->right) node_queue.push(node->right);
+        vector<vector<int>> res;
+        if (root == nullptr) return res;
+        bool is_reverse = false;
+        queue<TreeNode*> q;
+        q.emplace(root);
+        while (!q.empty()) {
+            deque<int> dq;
+            int size = q.size();
+            for (int i = 0; i < size; ++i) {
+                TreeNode* node = q.front();
+                q.pop();
+                if (!is_reverse)
+                    dq.emplace_back(node->val);
+                else if (is_reverse)
+                    dq.emplace_front(node->val);
+                if (node->left) q.emplace(node->left);
+                if (node->right) q.emplace(node->right);
             }
-            vec.emplace_back(vector<int>{level_list.begin(), level_list.end()});
-            reverse = !reverse;
+            res.emplace_back(vector<int>(dq.begin(), dq.end()));
+            is_reverse = !is_reverse;
         }
-        return vec;
+
+        return res;
     }
 };
-
