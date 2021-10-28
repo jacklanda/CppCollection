@@ -12,8 +12,10 @@
  */
 
 /* Solution 1. Recursive method */
+/* 时间复杂度: O(n) */
+/* 空间复杂度: O(n) => 递归调用的栈空间大小 */
 class Solution {
-   public:
+public:
     ListNode* reverseList(ListNode* head) {
         if (!head) return nullptr;
         return reverse(head);
@@ -28,31 +30,24 @@ class Solution {
 };
 
 /* Solution 2. Three-Pointers Method */
+/* 时间复杂度: O(n) */
+/* 空间复杂度: O(1) */
 class Solution {
-   public:
+public:
     ListNode* reverseList(ListNode* head) {
-        if (!head) {
-            return head;
-        } else if (!head->next) {
-            return head;
-        } else if (!head->next->next) {
-            head->next->next = head;
-            ListNode* temp = head->next;
-            head->next = nullptr;
-            return temp;
+        if (head == nullptr || head->next == nullptr) return head;
+        ListNode* slow = head;
+        ListNode* midd = head->next;
+        ListNode* fast = head->next->next;
+        slow->next = nullptr;
+        while (fast != nullptr) {
+            midd->next = slow;
+            slow = midd;
+            midd = fast;
+            fast = fast->next;
         }
-        ListNode* prev = head->next->next;
-        ListNode* curr = head->next;
-        ListNode* post = head;
-        post->next = nullptr;
-        while (prev) {
-            curr->next = post;
-            post = curr;
-            curr = prev;
-            prev = prev->next;
-        }
-        curr->next = post;
+        midd->next = slow;
 
-        return curr;
+        return midd;
     }
 };
