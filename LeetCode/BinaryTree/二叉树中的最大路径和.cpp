@@ -9,6 +9,10 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+/* 递归-DFS */
+/* 时间复杂度: O(N) */
+/* 空间复杂度: O(N) */
 class Solution {
 public:
     int maxPathSum(TreeNode* root) {
