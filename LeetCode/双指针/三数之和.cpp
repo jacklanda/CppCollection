@@ -1,41 +1,33 @@
-/* 双指针法是该问题的最优解法
- * 时间复杂度：O(n^2) */
+/* 双指针法是该问题的最优解法 */
+/* 时间复杂度：O(n^2) */
+/* 空间复杂度: O(1) */
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> result;
-        sort(nums.begin(), nums.end());
-        // 找出a + b + c = 0：a = nums[i], b = nums[left], c = nums[right]
-        for (int i = 0; i < nums.size(); i++) {
-            // 排序之后如果第一个元素已经大于零，那么无论如何组合都不可能凑成三元组，直接返回结果就可以了
-            if (nums[0] > 0) {
-                return result;
-            }
-            // 正确去重方法
-            if (i > 0 && nums[i] == nums[i - 1]) {
-                continue;
-            }
-            int left = i + 1;
-            int right = nums.size() - 1;
-            while (right > left) {
-                if (nums[i] + nums[left] + nums[right] > 0) {
-                    right--;
-                } else if (nums[i] + nums[left] + nums[right] < 0) {
-                    left++;
-                } else {
-                    result.push_back(
-                        vector<int>{nums[i], nums[left], nums[right]});
-                    // 去重逻辑应该放在找到一个三元组之后
-                    while (right > left && nums[right] == nums[right - 1])
-                        right--;
-                    while (right > left && nums[left] == nums[left + 1]) left++;
-                    // 找到答案时，双指针同时收缩
-                    right--;
-                    left++;
+        vector<vector<int>> res;
+        std::sort(nums.begin(), nums.end());  // 先对数组进行排序
+        for (int i = 0; i < nums.size(); ++i) {
+            int j = i + 1, k = nums.size() - 1;
+            if (i >= 1 && nums[i] == nums[i - 1]) continue;  // 对i去重
+            while (j < k) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) {  // 对j去重
+                    ++j;
+                    continue;
+                }
+                if (k < nums.size() - 1 && nums[k] == nums[k + 1]) {  // 对k去重
+                    --k;
+                    continue;
+                }
+                if (nums[i] + nums[j] + nums[k] > 0)
+                    --k;
+                else if (nums[i] + nums[j] + nums[k] < 0)
+                    ++j;
+                else if (nums[i] + nums[j] + nums[k] == 0) {
+                    res.emplace_back(vector<int>{nums[i], nums[j], nums[k]});
+                    ++j;
                 }
             }
         }
-        return result;
+        return res;
     }
 };
-
