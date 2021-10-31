@@ -9,10 +9,38 @@
  * };
  */
 
-/* 解法一：
+/* 解法一： */
+/* 使用辅助vector，非原地排序 */
+/* 时间复杂度: O(nlogn) */
+/* 空间复杂度: O(n) */
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+        if (head == nullptr) return nullptr;
+        ListNode* phead = head;
+        vector<int> vec;
+        while (phead) {
+            vec.emplace_back(phead->val);
+            phead = phead->next;
+        }
+        std::sort(vec.begin(), vec.end());
+        ListNode* dh = new ListNode();
+        ListNode* cur = dh;
+        for (const int& n : vec) {
+            ListNode* node = new ListNode(n, nullptr);
+            cur->next = node;
+            cur = cur->next;
+        }
+        return dh->next;
+    }
+};
+
+/* 解法二：
  * 两次遍历，
  * 使用STL内置的基于
  * 堆排序的优先级队列 */
+/* 时间复杂度: O(nlogn) */
+/* 空间复杂度: O(logn) */
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
