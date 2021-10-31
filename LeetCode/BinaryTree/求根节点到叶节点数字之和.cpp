@@ -28,5 +28,5 @@ public:
     }
 
 private:
-    int res;
+    int res = 0;
 };
