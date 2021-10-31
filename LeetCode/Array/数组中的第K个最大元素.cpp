@@ -69,7 +69,6 @@ public:
  * 在数组中的绝对位置的特性，并且每次
  * 从最内层的while跳出后能缩小到为原来一半的搜索范围，
  * 通过这样“减而治之”的思想实现数组中的第K大元素的查找。
- * 注意: 每次通过 random 随机选取 pivot 可以尽量避免最坏情况发生！
  * 时间复杂度: O(n)
  * 空间复杂度: O(1) */
 class Solution {
@@ -78,6 +77,9 @@ public:
         int low = 0, high = nums.size() - 1, len = nums.size();
         while (true) {
             int l = low, h = high;
+            // 注意: 每次快查通过 random 随机选取 pivot 可以尽量避免最坏情况发生
+            int random_index = low + std::rand() % (high - low + 1);
+            std::swap(nums[low], nums[random_index]);
             while (l < h) {
                 while (l < h && nums[h] >= nums[low]) --h;
                 while (l < h && nums[l] <= nums[low]) ++l;
