@@ -32,8 +32,28 @@ public:
  * 堆顶是第K个最大的数，
  * 本题可直接使用STL中的
  * priority_queue来实现相关算法。
+ * 时间复杂度: O(nlogk)
+ * 空间复杂度: O(k) */
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        priority_queue<int, vector<int>, std::greater<int>> pq;
+        for (const int& n : nums) {
+            if (pq.size() == k && n <= pq.top())
+                continue;
+            else if (pq.size() == k && n > pq.top())
+                pq.pop();
+            pq.emplace(n);
+        }
+        return pq.top();
+    }
+};
+
+/* 优先级队列 ——— 大顶堆
+ * 原理类似使用小顶堆
  * 时间复杂度: O(nlogn)
- * 空间复杂度: O(logn) => 堆排序递归调用栈空间的深度 */
+ * 空间复杂度: O(n)
+ * */
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
