@@ -6,7 +6,7 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-/* 注意初始边界条件检查 */
+/* 双指针-前后指针 */
 /* 时间复杂度: O(n) */
 /* 空间复杂度: O(1) */
 class Solution {
@@ -16,16 +16,17 @@ public:
             return nullptr;
         else if (head->val == val)
             return head->next;
-        ListNode* cur = head;
-        while (cur->next) {
-            if (cur->next->val == val && cur->next->next != nullptr) {
-                cur->next = cur->next->next;
+
+        ListNode* post = head;
+        ListNode* prev = head->next;
+        while (prev) {
+            if (prev->val == val) {
+                post->next = prev->next;
                 break;
-            } else if (cur->next->val == val && cur->next->next == nullptr) {
-                cur->next = nullptr;
-                break;
+            } else {
+                prev = prev->next;
+                post = post->next;
             }
-            cur = cur->next;
         }
         return head;
     }
