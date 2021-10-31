@@ -4,18 +4,17 @@ public:
     int strStr(string haystack, string needle) { return haystack.find(needle); }
 };
 
-/* 调用库函数substr */
+/* 滑动窗口 */
 class Solution {
 public:
     int strStr(string haystack, string needle) {
-        int hsize = haystack.size(), nsize = needle.size(), cur = 0;
-        if (!nsize)
-            return 0;
-        else if (!hsize && nsize)
-            return -1;
-        while (cur + nsize <= hsize) {
-            if (haystack.substr(cur, nsize) == needle) return cur;
-            ++cur;
+        // 定义头指针指向haystack字符串头，尾指针指向needle字符串尾
+        int hsize = haystack.size(), nsize = needle.size();
+        int head = 0, tail = nsize - 1;
+        while (tail < hsize) {
+            if (haystack.substr(head, nsize) == needle) return head;
+            ++head;
+            ++tail;
         }
         return -1;
     }
