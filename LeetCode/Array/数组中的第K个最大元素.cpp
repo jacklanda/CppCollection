@@ -45,32 +45,29 @@ public:
 
 /* 减治法：
  * 利用每一次快排可以确定一个元素
- * 在数组中的绝对位置的特性，且在每次
- * 调用partition函数进行切分后能缩小搜索的范围。
+ * 在数组中的绝对位置的特性，并且每次
+ * 从最内层的while跳出后能缩小到为原来一半的搜索范围。
  * 通过这样“减而治之”的思想实现数组中的第K大元素的查找
  * 时间复杂度: O(n)
- * 空间复杂度: O(logn) => 递归调用消耗的栈空间 */
+ * 空间复杂度: O(1) */
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        int len = nums.size(), left = 0, right = len - 1;
+        int low = 0, high = nums.size() - 1, len = nums.size();
         while (true) {
-            int l = left, r = right;
-            int idx = left;
-            std::swap(nums[left], nums[idx]);
-            while (l < r) {
-                while (l < r && nums[r] >= nums[left]) --r;
-                while (l < r && nums[l] <= nums[left]) ++l;
-                std::swap(nums[l], nums[r]);
+            int l = low, h = high;
+            while (l < h) {
+                while (l < h && nums[h] >= nums[low]) --h;
+                while (l < h && nums[l] <= nums[low]) ++l;
+                std::swap(nums[l], nums[h]);
             }
-            std::swap(nums[l], nums[left]);
-
+            std::swap(nums[l], nums[low]);
             if (l == len - k)
                 return nums[l];
+            else if (l < len - k)
+                low = l + 1;
             else if (l > len - k)
-                right = l - 1;
-            else
-                left = l + 1;
+                high = l - 1;
         }
     }
 };
