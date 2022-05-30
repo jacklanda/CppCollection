@@ -1,6 +1,6 @@
-/* 投机取巧法:
- * 时间复杂度：O(n)
- * 空间复杂度：O(1) */
+/* Using STL function
+ * time complexity: O(n)
+ * space complexity: O(1) */
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
@@ -9,9 +9,9 @@ public:
     }
 };
 
-/* 双指针法：
- * 时间复杂度：O(n)
- * 空间复杂度：O(1) */
+/* Two pointer approach
+ * time complexity: O(n)
+ * space complexity: O(1) */
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
