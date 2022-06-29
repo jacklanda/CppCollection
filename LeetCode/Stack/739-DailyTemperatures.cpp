@@ -1,23 +1,24 @@
-/* 使用单调栈即可 */
-/* 时间复杂度: O(n) */
-/* 空间复杂度: O(n) */
+/* Monotonic Stack */
+/* time complexity: O(n) */
+/* space complexity: O(n) */
+
 class Solution {
 public:
     vector<int> dailyTemperatures(vector<int>& temperatures) {
         std::stack<int> stk;
-        std::vector<int> result(temperatures.size());
+        std::vector<int> res(temperatures.size(), 0);
         for (int i = 0; i < temperatures.size(); ++i) {
             while (!stk.empty()) {
                 int tmp = stk.top();
                 if (temperatures[tmp] < temperatures[i]) {
                     stk.pop();
-                    result[tmp] = i - tmp;
+                    res[tmp] = i - tmp;
                 } else {
                     break;
                 }
             }
-            stk.push(i);
+            stk.emplace(i);
         }
-        return result;
+        return res;
     }
 };
