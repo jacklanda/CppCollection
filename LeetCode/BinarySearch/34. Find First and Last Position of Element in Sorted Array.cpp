@@ -1,6 +1,6 @@
-/* 暴力法确定左右边界 */
-/* 时间复杂度: O(n) */
-/* 空间复杂度: O(1) */
+/* Brute Force */
+/* time complexity: O(n) */
+/* space complexity: O(1) */
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
@@ -14,9 +14,9 @@ public:
     }
 };
 
-/* 二分查找确定左右边界 */
-/* 时间复杂度: O(logn) */
-/* 空间复杂度: O(1) */
+/* Binary Search */
+/* time complexity: O(logn) */
+/* space complexity: O(1) */
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
