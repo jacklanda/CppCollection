@@ -9,6 +9,7 @@
  * };
  */
 
+/* Swap value in node */
 /* time complexity: O(n^2) */
 /* space complexity: O(1) */
 class Solution {
@@ -20,5 +21,32 @@ public:
             }
         }
         return head;
+    }
+};
+
+/* Swap node */
+/* time complexity: O(n^2) */
+/* space complexity: O(1) */
+class Solution {
+public:
+    ListNode* insertionSortList(ListNode* head) {
+        if (head == nullptr or head->next == nullptr)
+            return head;
+
+        ListNode* dummy = new ListNode(0);
+        ListNode* pre = dummy;
+        ListNode* cur = head;
+
+        while (cur) {
+            while (pre->next and pre->next->val < cur->val)
+                pre = pre->next;
+            ListNode* next = cur->next;
+            cur->next = pre->next;
+            pre->next = cur;
+            cur = next;
+            pre = dummy;
+        }
+
+        return dummy->next;
     }
 };
