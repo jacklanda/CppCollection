@@ -1,6 +1,6 @@
-/* m is the size of text1, n is the size of text2 */
 /* time complexity: O(m*n) */
 /* space complexity: O(m*n) */
+/* m is the size of text1, n is the size of text2 */
 
 class Solution {
 public:
