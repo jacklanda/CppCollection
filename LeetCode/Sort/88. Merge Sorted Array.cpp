@@ -1,6 +1,6 @@
-/* Classic Merge Sort on Array */
-/* Time complexity: O(n*log(n)) */
-/* Space complexity: O(n) */
+/* Classic Merge Operation on Array */
+/* time complexity: O(n) */
+/* space complexity: O(n) */
 
 class Solution {
 public:
