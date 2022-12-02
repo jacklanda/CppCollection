@@ -9,7 +9,9 @@
  * };
  */
 
-/* 双指针一次遍历即可 */
+/* Two-pointer approach */
+/* time complexity: O(n) */
+/* space complexity: O(1) */
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
