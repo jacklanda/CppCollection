@@ -27,3 +27,33 @@ public:
         return min(minDepth(root->left), minDepth(root->right)) + 1;
     }
 };
+
+/* BFS */
+/* time complexity: O(n) */
+/* space complexity: O(log(n)) */
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        if (root == nullptr)
+            return 0;
+        int depth = 1;
+        queue<TreeNode*> q;
+        q.emplace(root);
+        while (!q.empty()) {
+            int size = q.size();
+            while (size--) {
+                TreeNode* node = q.front();
+                q.pop();
+                if (node->left == nullptr && node->right == nullptr)
+                    return depth;
+                if (node->left != nullptr)
+                    q.emplace(node->left);
+                if (node->right != nullptr)
+                    q.emplace(node->right);
+            }
+            depth++;
+        }
+
+        return -1;
+    }
+};
