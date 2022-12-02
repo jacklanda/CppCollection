@@ -9,32 +9,32 @@
  * };
  */
 
-/* 三指针 */
-/* 时间复杂度: O(n) */
-/* 空间复杂度: O(1) */
+/* Three-pointers approach */
+/* time complexity: O(n) */
+/* space complexity: O(1) */
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        if (head == nullptr) return nullptr;
-        ListNode* dh = new ListNode(INT_MAX, head);
-        ListNode* slow = dh;
-        ListNode* midd = dh->next;
-        ListNode* fast = dh->next->next;
-        while (fast) {
-            if (midd->val == fast->val) {
-                while (fast && midd->val == fast->val) fast = fast->next;
-                slow->next = fast;
-                midd = fast;
-                if (fast)
-                    fast = fast->next;
-                else
-                    break;
+        if (head == nullptr || head->next == nullptr)
+            return head;
+
+        ListNode dummy(INT_MAX, head);
+        ListNode* prev = &dummy;
+        ListNode* curr = dummy.next;
+        ListNode* next = curr->next;
+        while (next) {
+            if (next->val == curr->val) {
+                while (next && curr->val == next->val)
+                    next = next->next;
+                prev->next = next;
+                curr = next;
+                next = next != nullptr ? next->next : next;
             } else {
-                slow = slow->next;
-                midd = midd->next;
-                fast = fast->next;
+                prev = prev->next;
+                curr = curr->next;
+                next = next->next;
             }
         }
-        return dh->next;
+        return dummy.next;
     }
 };
