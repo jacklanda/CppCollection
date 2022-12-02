@@ -11,9 +11,9 @@
  * };
  */
 
-/* Solution 1. Recursive method */
-/* 时间复杂度: O(n) */
-/* 空间复杂度: O(n) => 递归调用的栈空间大小 */
+/* Solution 1. Recursive approach */
+/* time complexity: O(n) */
+/* space complexity: O(n) => the size of call stack */
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
@@ -29,25 +29,25 @@ public:
     }
 };
 
-/* Solution 2. Three-Pointers Method */
-/* 时间复杂度: O(n) */
-/* 空间复杂度: O(1) */
+/* Solution 2. Three-pointers approach */
+/* time complexity: O(n) */
+/* space complexity: O(1) */
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if (head == nullptr || head->next == nullptr) return head;
-        ListNode* slow = head;
-        ListNode* midd = head->next;
-        ListNode* fast = head->next->next;
-        slow->next = nullptr;
-        while (fast != nullptr) {
-            midd->next = slow;
-            slow = midd;
-            midd = fast;
-            fast = fast->next;
-        }
-        midd->next = slow;
+        if (head == nullptr || head->next == nullptr)
+            return head;
 
-        return midd;
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+        ListNode* next = head->next;
+        while (curr) {
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+            next = next != nullptr ? next->next : next;
+        }
+
+        return prev;
     }
 };
