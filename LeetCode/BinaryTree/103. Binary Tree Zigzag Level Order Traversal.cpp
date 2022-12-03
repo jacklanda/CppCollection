@@ -9,8 +9,10 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-/* 时间复杂度: O(n) */
-/* 空间复杂度: O(n) */
+
+/* BFS */
+/* time complexity: O(n) */
+/* space complexity: O(n) */
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
