@@ -11,22 +11,20 @@
  */
 
 /* DFS */
-/* 时间复杂度: O(n) */
-/* 空间复杂度: O(n) */
+/* time complexity: O(n) */
+/* space complexity: O(n) */
 class Solution {
 public:
     int sumNumbers(TreeNode* root) {
-        if (root == nullptr) return 0;
-        dfs(root, 0);
-        return res;
+        return dfs(root, 0);
     }
-    void dfs(TreeNode* root, int num) {
-        num = num * 10 + root->val;
-        if (!root->left && !root->right) res += num;
-        if (root->left) dfs(root->left, num);
-        if (root->right) dfs(root->right, num);
+    
+    int dfs(TreeNode* root, int sum) {
+        if (root == nullptr)
+            return 0;
+        sum = sum * 10 + root->val;
+        if (root->left == nullptr && root->right == nullptr)
+            return sum;
+        return dfs(root->left, sum) + dfs(root->right, sum);
     }
-
-private:
-    int res = 0;
 };
