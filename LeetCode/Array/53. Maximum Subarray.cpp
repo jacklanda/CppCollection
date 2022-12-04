@@ -1,3 +1,4 @@
+/* Kadane's algorithm, Greedy algo */
 /* time complexity: O(n) */
 /* space complexity: O(1) */
 
