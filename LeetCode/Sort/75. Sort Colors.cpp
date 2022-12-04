@@ -25,3 +25,21 @@ public:
         }
     }
 };
+
+/* Two-pointers Approach */
+/* time complexity: O(n) */
+/* space complexity: O(n) */
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int left = 0, midd = 0, right = nums.size() - 1;
+        while (midd <= right) {
+            if (nums[midd] == 0)
+                std::swap(nums[midd++], nums[left++]);
+            else if (nums[midd] == 1)
+                midd++;
+            else
+                std::swap(nums[midd], nums[right--]);
+        }
+    }
+};
