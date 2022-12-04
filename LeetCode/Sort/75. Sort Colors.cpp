@@ -1,3 +1,7 @@
+/* Bucket Sort Approach */
+/* time complexity: O(n) */
+/* space complexity: O(n) */
+
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
@@ -6,23 +10,18 @@ public:
         for (const int& num : nums) {
             max_freq = std::max(max_freq, ++num2freq[num]);
         }
-
+        
         vector<vector<int>> buckets(3);
         for (const auto& pair : num2freq) {
             for (int i = 0; i < pair.second; ++i) {
-                if (pair.first == 0) {
-                    buckets[0].emplace_back(pair.first);
-                } else if (pair.first == 1) {
-                    buckets[1].emplace_back(pair.first);
-                } else if (pair.first == 2) {
-                    buckets[2].emplace_back(pair.first);
-                }
+                buckets[pair.first].emplace_back(pair.first);
             }
         }
-
+        
         nums.clear();
-        for (int i = 0; i < 3; ++i) {
-            for (const int& num : buckets[i]) nums.emplace_back(num);
+        for(const vector<int>& bucket : buckets) {
+            for (const int& num : bucket)
+                nums.emplace_back(num);
         }
     }
 };
