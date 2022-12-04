@@ -1,5 +1,5 @@
-/* 时间复杂度: O(k), 常数k取决于整数的二进制位数 */
-/* 空间复杂度: O(1) */
+/* time complexity: O(k), k depends on the bits number of the uint. */
+/* space complexity: O(1) */
 class Solution {
 public:
     int hammingWeight(uint32_t n) {
@@ -13,8 +13,8 @@ public:
     }
 };
 
-/* 时间复杂度: O(k), 常数k取决于待判断的二进制数中1的位数 */
-/* 空间复杂度: O(1) */
+/* time complexity: O(k), k depends on the bits number of the uint. */
+/* space complexity: O(1) */
 class Solution {
 public:
     int hammingWeight(uint32_t n) {
