@@ -11,6 +11,7 @@
  */
 
 
+/* Memorized search using map */
 /* time complexity: O(n) */
 /* space complexity: O(log(n)) */
 
@@ -35,5 +36,26 @@ public:
         int sum2 = rob(root->left) + rob(root->right);
         node2sum[root] = std::max(sum1, sum2);
         return std::max(sum1, sum2);
+    }
+};
+
+/* DP on Binary Tree */
+/* time complexity: O(n) */
+/* space complexity: O(log(n)) */
+class Solution {
+private:
+    vector<int> robTree(TreeNode* root) {
+        if (root == nullptr)
+            return vector<int>{0, 0};
+        vector<int> left_res = robTree(root->left);
+        vector<int> right_res = robTree(root->right);
+        int res1 = root->val + left_res[0] + right_res[0];  // steal current node
+        int res2 = std::max(left_res[0], left_res[1]) + std::max(right_res[0], right_res[1]);  // non-steal current node
+        return {res2, res1};
+    }
+public:
+    int rob(TreeNode* root) {
+        vector<int> res = robTree(root);
+        return std::max(res[0], res[1]);
     }
 };
