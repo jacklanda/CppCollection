@@ -13,7 +13,7 @@ public:
 };
 
 /* 多重集合 */
-/* 时间复杂度: O(n) */
+/* 时间复杂度: O(nlogn) => multiset 使用红黑树实现排序 */
 /* 空间复杂度: O(n) */
 class Solution {
 public:
